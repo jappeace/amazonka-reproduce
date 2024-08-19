@@ -3,6 +3,7 @@ module Template
   )
 where
 
+import Control.Concurrent
 import Control.Monad.Trans.Resource(runResourceT) --
 import Amazonka.Send(paginate, send)
 import Data.Conduit(runConduit, (.|))
@@ -15,6 +16,7 @@ import Data.Time
 import Amazonka.Env(Env'(..), Env)
 import Amazonka(Service(..))
 import qualified Amazonka.Core as Core
+import GHC.Debug.Stub
 
 -- for euwest, we need to fix the endpoint otherwise it can't find it.
 setEndpoint :: Service -> Service
@@ -28,10 +30,11 @@ envMod :: Env -> Env
 envMod x = x{overrides = setEndpoint}
 
 main :: IO ()
-main = do
+main = withGhcDebug $ do
   env <- newEnv discover
   forever $ do
     currentTime <- getCurrentTime
     putStrLn ("loop " <> show currentTime)
     void $ runResourceT $
       send (envMod env) (newQuery "SELECT 1")
+    threadDelay 5000000
