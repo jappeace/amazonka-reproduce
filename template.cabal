@@ -81,7 +81,7 @@ executable exe
   build-depends:
       template
   ghc-options:
-              "-with-rtsopts=-N -p -s -hc -K1K -M86M"
+              "-with-rtsopts=-N -p -s -hc -K1K -M200M"
               -fprof-auto
               -prof
               -O0
