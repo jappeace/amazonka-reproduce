@@ -4,7 +4,7 @@ module Template
 where
 
 import Control.Monad.Trans.Resource(runResourceT) --
-import Amazonka.Send(paginate)
+import Amazonka.Send(paginate, send)
 import Data.Conduit(runConduit, (.|))
 import Conduit(headC)
 import Amazonka.TimeStreamQuery
@@ -33,6 +33,5 @@ main = do
   forever $ do
     currentTime <- getCurrentTime
     putStrLn ("loop " <> show currentTime)
-    void $ runResourceT $ do
-      runConduit $ paginate (envMod env) (newQuery "SELECT 1")
-                .| headC
+    void $ runResourceT $
+      send (envMod env) (newQuery "SELECT 1")

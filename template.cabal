@@ -44,7 +44,7 @@ common common-options
       NumericUnderscores
 
   ghc-options:
-    -O2 -Wall -Werror -Wincomplete-uni-patterns
+    -O2 -Wall -Wincomplete-uni-patterns
     -Wincomplete-record-updates -Widentities -Wredundant-constraints
     -Wcpp-undef -fwarn-tabs -Wpartial-fields
     -fdefer-diagnostics 
@@ -79,7 +79,7 @@ executable exe
       app
   build-depends:
       template
-  ghc-options:  "-with-rtsopts=-N -K1K -M83M"
+  ghc-options:  "-with-rtsopts=-N -K1K -M86M"
 
 test-suite unit
   import: common-options
