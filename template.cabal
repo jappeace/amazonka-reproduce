@@ -47,13 +47,19 @@ common common-options
     -O2 -Wall -Werror -Wincomplete-uni-patterns
     -Wincomplete-record-updates -Widentities -Wredundant-constraints
     -Wcpp-undef -fwarn-tabs -Wpartial-fields
-    -fdefer-diagnostics -Wunused-packages
+    -fdefer-diagnostics 
     -fenable-th-splice-warnings
     -fno-omit-yields
-    -threaded -rtsopts "-with-rtsopts=-N -M7G -T -Iw10"
+    -threaded -rtsopts 
 
   build-depends:
-      base >=4.9.1.0 && <4.21.0
+      base >=4.9.1.0 && <4.21.0,
+      amazonka,
+      amazonka-timestream-query,
+      amazonka-core,
+      time,
+      conduit,
+      resourcet
 
   default-language: Haskell2010
 
@@ -73,7 +79,7 @@ executable exe
       app
   build-depends:
       template
-  ghc-options: -Wno-unused-packages
+  ghc-options:  "-with-rtsopts=-N -K1K -M83M"
 
 test-suite unit
   import: common-options
