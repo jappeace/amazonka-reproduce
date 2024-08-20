@@ -15,6 +15,7 @@ import Data.Time
 import Amazonka.Env(Env'(..), Env)
 import Amazonka(Service(..))
 import qualified Amazonka.Core as Core
+import Amazonka.S3.ListBuckets
 
 -- for euwest, we need to fix the endpoint otherwise it can't find it.
 setEndpoint :: Service -> Service
@@ -34,4 +35,4 @@ main = do
     currentTime <- getCurrentTime
     putStrLn ("loop " <> show currentTime)
     void $ runResourceT $
-      send (envMod env) (newQuery "SELECT 1")
+      send env newListBuckets
