@@ -29,6 +29,7 @@
 
         buildInputs = [
           hpkgs.haskell-language-server
+          hpkgs.ghc-debug-brick
           pkgs.ghcid
           pkgs.cabal-install
         ];
