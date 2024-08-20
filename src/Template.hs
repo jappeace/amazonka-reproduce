@@ -17,17 +17,6 @@ import Amazonka(Service(..))
 import qualified Amazonka.Core as Core
 import Amazonka.S3.ListBuckets
 
--- for euwest, we need to fix the endpoint otherwise it can't find it.
-setEndpoint :: Service -> Service
-setEndpoint y = let z = y{
-  endpointPrefix = "query-cell1.timestream",
-  endpoint = Core.defaultEndpoint z
-  }
-  in z
-
-envMod :: Env -> Env
-envMod x = x{overrides = setEndpoint}
-
 main :: IO ()
 main = do
   env <- newEnv discover
